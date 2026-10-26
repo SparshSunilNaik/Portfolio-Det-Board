@@ -11,8 +11,11 @@ Reviewed: 2026-10-26. The portfolio separates claims from presentation in `src/d
 | [THE-WEB](https://github.com/SparshSunilNaik/THE-WEB) | Public, read-only reference | Interaction architecture study and supporting portfolio evidence |
 | `peter-companion`, `peter-windows`, `sage` | Private repositories, reviewed through authenticated read-only access | Status/architecture evidence only; no repository links or private content published |
 | `Cobot` | Private repository, reviewed through authenticated read-only access | Product meaning, architecture, implemented workflows, validation surface, status, and contribution history; no private link or infrastructure details published |
+| Owner-supplied `image.jpg` | Private local source; ignored by Git | Optimized to a metadata-free 600×750 WebP portrait for the central identity dossier |
 
 The raw resume is not committed. It contains a phone number and direct email address. The website links to the owner-approved [public résumé on Google Drive](https://drive.google.com/file/d/15UN1z4oPUHHgRHgBR304ekByyrhwGFF0/view?usp=drive_link), while the printable recruiter briefing is labeled separately as the Portfolio Summary.
+
+The original portrait file is not committed. Only `public/profile/sparsh-naik.webp` is published; it preserves the supplied photograph and orientation without facial alteration.
 
 Verified public identity links:
 

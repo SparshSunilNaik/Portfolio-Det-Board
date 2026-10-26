@@ -9,6 +9,9 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { Dossier } from '../components/dossiers/Dossier'
 import { GuidedOverview } from '../components/dossiers/GuidedOverview'
 import { EvidenceCard } from '../components/board/EvidenceCard'
+import { ProfilePortrait } from '../components/ui/ProfilePortrait'
+import { IdentityDossier } from '../components/board/IdentityDossier'
+import { INITIAL_CAMERA } from '../App'
 import indexHtml from '../../index.html?raw'
 import spiderLogo from '../../public/brand/case-spider.svg?raw'
 
@@ -53,6 +56,13 @@ describe('Phase 4 content and identity corrections',()=>{
   it('uses former-president wording without an ongoing presidency',()=>{expect(publicCopy).toContain('FORMER PRESIDENT');expect(publicCopy).toContain('Former President');expect(publicCopy).not.toMatch(/Data Science Club[^.\"<]*(Present|present)/)})
   it('does not present unconfirmed Ignis employment',()=>{expect(publicCopy.toLocaleLowerCase()).not.toContain('ignis')})
   it('references the new spider favicon and no obsolete eye identity',()=>{expect(indexHtml).toContain('brand/case-spider-favicon.svg');expect(indexHtml.toLocaleLowerCase()).not.toContain('watchful');expect(spiderLogo).toContain('CASE spider emblem');expect(spiderLogo).toContain('#a33d37')})
+})
+
+describe('Phase 5 portrait and orientation',()=>{
+  it('renders the optimized owner portrait through the Pages base path',()=>{const html=renderToStaticMarkup(createElement(ProfilePortrait));expect(html).toContain('profile/sparsh-naik.webp');expect(html).toContain('Portrait of Sparsh Sunil Naik');expect(html).toContain('width="600"');expect(html).toContain('height="750"')})
+  it('retains the exact approved desktop camera configuration',()=>{expect(INITIAL_CAMERA).toEqual({x:-690,y:-395,scale:.72})})
+  it('adds a subtle start marker and explicit evidence-card instruction',()=>{const html=renderToStaticMarkup(createElement(IdentityDossier,{onOverview:()=>undefined,onProject:()=>undefined}));expect(html).toContain('START HERE / CASE 000');expect(html).toContain('CLICK ANY EVIDENCE CARD TO INSPECT')})
+  it('briefs recruiters across Cobot, autonomy, infrastructure, AI, and research',()=>{const html=renderToStaticMarkup(createElement(GuidedOverview,{onClose:()=>undefined,onFocus:()=>undefined}));for(const title of ['COBOT','EgoNav VLA','Polaris','5G Edge Orchestrator','Sentinel','RL Dynamic Pricing'])expect(html).toContain(title);expect(html).toContain('BEST PAPER');expect(html).toContain('VIEW RESUME');expect(html).toContain('LINKEDIN');expect(html).toContain('GITHUB')})
 })
 
 describe('board coordinate transforms',()=>{

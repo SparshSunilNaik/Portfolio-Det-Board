@@ -3,5 +3,6 @@ dist/
 .vite/
 *.tsbuildinfo
 SUPER RESUME.pdf
+image.jpg
 .env*
 !.env.example

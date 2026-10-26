@@ -14,4 +14,6 @@ Phase 3 adds:
 
 Phase 4 replaces the isolated phosphor-green terminal treatment with a classified-midnight system: deep navy charcoal, steel-blue casing, icy-blue technical text, warm off-white labels, and restrained crimson markers. COBOT receives its own layered system schematic based on the verified Browser → Next.js → FastAPI → SQLite/Ollama architecture; no physical robotics imagery is used.
 
+Phase 5 replaces the initials placeholder with the owner-supplied portrait inside the existing evidence-photo frame. A small static `START HERE / CASE 000` annotation sits above the central dossier on desktop and is hidden on the compact mobile canvas to protect the approved composition.
+
 All additions are CSS/SVG/static markup. They add no animation loop, bitmap texture, canvas renderer, or runtime dependency.

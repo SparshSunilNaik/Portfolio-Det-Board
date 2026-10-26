@@ -7,7 +7,7 @@ import { BrandLogo } from './components/ui/BrandLogo'
 import { projects } from './data/projects'
 import type { Camera, Category } from './types'
 
-const initialCamera: Camera = { x: -690, y: -395, scale: .72 }
+export const INITIAL_CAMERA: Camera = { x: -690, y: -395, scale: .72 }
 
 export function App() {
   const [selectedId,setSelectedId]=useState<string|null>(()=>new URLSearchParams(location.hash.slice(1)).get('project'))
@@ -15,7 +15,7 @@ export function App() {
   const [category,setCategory]=useState<Category|'all'>('all')
   const [query,setQuery]=useState('')
   const [overview,setOverview]=useState(false)
-  const [camera,setCamera]=useState<Camera>(()=>innerWidth<=760?{x:-510,y:-265,scale:.36}:initialCamera)
+  const [camera,setCamera]=useState<Camera>(()=>innerWidth<=760?{x:-510,y:-265,scale:.36}:INITIAL_CAMERA)
   const selected=projects.find(p=>p.id===selectedId) ?? null
   const selectProject=useCallback((id:string|null)=>{
     setSelectedId(id); const url=new URL(location.href)

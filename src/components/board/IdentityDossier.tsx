@@ -1,0 +1,9 @@
+export function IdentityDossier({onOverview,onProject}:{onOverview:()=>void;onProject:()=>void}){
+  return <section className="identity-dossier" aria-labelledby="identity-title">
+    <span className="binder-clip"/><div className="identity-grid"><div><span className="classified">CASE 000 · PRIMARY SUBJECT</span><h2 id="identity-title">SPARSH<br/>SUNIL NAIK</h2><p className="role">AI ENGINEER / SOFTWARE &amp; SYSTEMS BUILDER</p></div><div className="portrait" aria-label="Abstract portrait placeholder"><b>SSN</b><span>SUBJECT<br/>PORTRAIT<br/>WITHHELD</span></div></div>
+    <p className="identity-summary">Computer Science Engineering student specializing in AI, building autonomous robots, cloud-native infrastructure, intelligent developer systems, and applied ML research.</p>
+    <dl><div><dt>INSTITUTION</dt><dd>KLE Technological University</dd></div><div><dt>PROGRAM</dt><dd>B.E. CSE — Artificial Intelligence</dd></div><div><dt>ACADEMIC RECORD</dt><dd>CGPA 9.00 / 10</dd></div></dl>
+    <div className="identity-actions"><button onClick={onProject}>Explore projects</button><button onClick={onOverview}>Public résumé</button><a href="https://github.com/SparshSunilNaik" target="_blank" rel="noreferrer">Contact / GitHub</a></div>
+    <small className="instruction">DRAG EMPTY BOARD TO PAN · SCROLL TO ZOOM · CLICK EVIDENCE TO INSPECT</small>
+  </section>
+}

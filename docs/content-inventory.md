@@ -11,7 +11,13 @@ Reviewed: 2026-10-26. The portfolio separates claims from presentation in `src/d
 | [THE-WEB](https://github.com/SparshSunilNaik/THE-WEB) | Public, read-only reference | Interaction architecture study and supporting portfolio evidence |
 | `peter-companion`, `peter-windows`, `sage` | Private repositories, reviewed through authenticated read-only access | Status/architecture evidence only; no repository links or private content published |
 
-The raw resume is not committed. It contains a phone number and direct email address. The site's printable public brief intentionally routes contact through the verified GitHub profile. No downloadable resume is generated from the private document.
+The raw resume is not committed. It contains a phone number and direct email address. The website links to the owner-approved [public résumé on Google Drive](https://drive.google.com/file/d/15UN1z4oPUHHgRHgBR304ekByyrhwGFF0/view?usp=drive_link), while the printable recruiter briefing is labeled separately as the Portfolio Summary.
+
+Verified public identity links:
+
+- [LinkedIn](https://www.linkedin.com/in/sparsh-naik-032362267/)
+- [GitHub](https://github.com/SparshSunilNaik)
+- [Official public résumé](https://drive.google.com/file/d/15UN1z4oPUHHgRHgBR304ekByyrhwGFF0/view?usp=drive_link)
 
 ## Primary project evidence
 

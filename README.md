@@ -1,6 +1,6 @@
-# CASE 000 — Sparsh Sunil Naik
+# SparshSunilNaik — Engineering Portfolio
 
-An interactive detective-board portfolio investigating autonomous systems, infrastructure, AI agents, RAG, and machine-learning research.
+CASE 000 is an interactive detective-board investigation of autonomous systems, infrastructure, AI agents, RAG, and machine-learning research.
 
 ## Development
 

@@ -3,6 +3,7 @@ import { InvestigationBoard } from './components/board/InvestigationBoard'
 import { Dossier } from './components/dossiers/Dossier'
 import { GuidedOverview } from './components/dossiers/GuidedOverview'
 import { Navigator } from './components/navigation/Navigator'
+import { BrandLogo } from './components/ui/BrandLogo'
 import { projects } from './data/projects'
 import type { Camera, Category } from './types'
 
@@ -30,7 +31,7 @@ export function App() {
   return <main className="app-shell">
     <a className="skip-link" href="#mobile-evidence">Skip to project index</a>
     <InvestigationBoard camera={camera} setCamera={setCamera} selectedId={selectedId} onSelect={selectProject} category={category} query={query} focusRequest={focusRequest} />
-    <header className="case-header" aria-label="Case identity"><span className="eyebrow">ENGINEERING INVESTIGATION</span><h1>CASE <i>000</i></h1><p>SPARSH SUNIL NAIK</p><small>{counts.projects} PROJECT FILES · {counts.technologies} TECHNOLOGIES · STATUS: ACTIVE</small></header>
+    <header className="case-header" aria-label="SparshSunilNaik engineering portfolio"><BrandLogo className="site-logo"/><div className="brand-copy"><h1>SparshSunilNaik</h1><p>CASE 000 / ENGINEERING INVESTIGATION</p><small>{counts.projects} PROJECT FILES · {counts.technologies} TECHNOLOGIES · STATUS: ACTIVE</small></div></header>
     <Navigator query={query} setQuery={setQuery} category={category} setCategory={setCategory} onFocus={focus} onOverview={()=>setOverview(true)} camera={camera} setCamera={setCamera} />
     <Dossier project={selected} onClose={()=>selectProject(null)} onFocus={focus} />
     {overview&&<GuidedOverview onClose={()=>setOverview(false)} onFocus={(id)=>{setOverview(false);focus(id)}} />}

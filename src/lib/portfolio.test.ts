@@ -3,6 +3,7 @@ import { projects, relationships } from '../data/projects'
 import { BOARD, clampScale, fitCamera, focusCamera, screenToBoard, zoomAt } from './board'
 import { validateGraph } from './graph'
 import { filterProjects } from './search'
+import { publicLinks } from '../data/links'
 
 describe('portfolio evidence graph',()=>{
   it('has unique, complete project metadata and valid relationships',()=>{expect(validateGraph(projects,relationships)).toEqual({valid:true,errors:[]})})
@@ -15,6 +16,11 @@ describe('search and filtering',()=>{
   it('searches title, technology, and engineering text',()=>{expect(filterProjects(projects,'Kubernetes','all').map(p=>p.id)).toEqual(expect.arrayContaining(['network-slicing','gpu-platform']));expect(filterProjects(projects,'governance','all').map(p=>p.id)).toContain('sentinel')})
   it('combines category and query filters',()=>{const hits=filterProjects(projects,'Python','robotics');expect(hits.length).toBeGreaterThan(0);expect(hits.every(p=>p.category==='robotics')).toBe(true)})
   it('is case insensitive',()=>expect(filterProjects(projects,'splitbrain','all')[0]?.id).toBe('splitbrain'))
+})
+
+describe('public identity links',()=>{
+  it('uses the approved resume and LinkedIn destinations',()=>{expect(publicLinks.resume).toBe('https://drive.google.com/file/d/15UN1z4oPUHHgRHgBR304ekByyrhwGFF0/view?usp=drive_link');expect(publicLinks.linkedin).toBe('https://www.linkedin.com/in/sparsh-naik-032362267/')})
+  it('keeps all identity destinations HTTPS and public',()=>{for(const url of Object.values(publicLinks)){expect(url).toMatch(/^https:\/\//);expect(url).not.toContain('localhost')}})
 })
 
 describe('board coordinate transforms',()=>{

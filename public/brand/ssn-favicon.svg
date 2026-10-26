@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SSN monogram">
+  <rect width="64" height="64" rx="8" fill="#171815"/>
+  <path d="M7 13h14v10H8v10h14M25 13h13v10H26v10h14M43 33V13l14 20V13" fill="none" stroke="#eee7d8" stroke-width="4" stroke-linejoin="miter"/>
+  <path d="M5 46c12-7 18 7 29 1s15-9 25-3" fill="none" stroke="#a33d37" stroke-width="3"/>
+  <circle cx="5" cy="46" r="3" fill="#c65a52"/><circle cx="34" cy="47" r="3" fill="#c65a52"/><circle cx="59" cy="44" r="3" fill="#c65a52"/>
+  <path d="M4 9V4h5M55 4h5v5M60 55v5h-5M9 60H4v-5" fill="none" stroke="#706f66" stroke-width="2"/>
+</svg>

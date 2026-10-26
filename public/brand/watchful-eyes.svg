@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 64" role="img" aria-labelledby="title desc">
+  <title id="title">Watchful eyes investigation emblem</title><desc id="desc">Two narrowed human eyes above a crimson evidence thread</desc>
+  <rect width="128" height="64" rx="2" fill="#171815"/>
+  <path d="M5 20V7h13M110 7h13v13M123 45v12h-13M18 57H5V45" fill="none" stroke="#66675f" stroke-width="2"/>
+  <path d="M12 20 51 14M77 14l39 6" fill="none" stroke="#d8cfbc" stroke-width="4" stroke-linecap="square"/>
+  <path d="M10 31Q27 18 55 27 35 47 10 31ZM118 31Q101 18 73 27q20 20 45 4Z" fill="#ddd5c4" stroke="#f0eadf" stroke-width="1.5"/>
+  <ellipse cx="38" cy="30" rx="7" ry="9" fill="#68777a" stroke="#252826" stroke-width="2"/><ellipse cx="90" cy="30" rx="7" ry="9" fill="#68777a" stroke="#252826" stroke-width="2"/>
+  <circle cx="40" cy="30" r="3" fill="#111210"/><circle cx="88" cy="30" r="3" fill="#111210"/>
+  <circle cx="42" cy="27" r="1.2" fill="#eee7d8"/><circle cx="90" cy="27" r="1.2" fill="#eee7d8"/>
+  <path d="M8 52C31 45 45 58 64 51s34-12 56-3" fill="none" stroke="#a33d37" stroke-width="2"/>
+  <g fill="#b64a43" stroke="#e08a7f"><circle cx="8" cy="52" r="3"/><circle cx="64" cy="51" r="3"/><circle cx="120" cy="48" r="3"/></g>
+</svg>

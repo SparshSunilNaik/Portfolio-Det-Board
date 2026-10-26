@@ -13,6 +13,7 @@ npm run preview -- --host 127.0.0.1
 Manual checks:
 
 - Desktop: initial identity dossier, drag, cursor-centered wheel zoom, project open/close, Escape, search, filters, guided briefing, external links.
+- Experience: filter Professional Experience, search Entropy or Software Engineering Intern, open E-001 and E-001/A, and verify the `ENGINEERED_AT` related-evidence navigation.
 - Touch/mobile: readable index, category filters, project bottom sheet, pinch zoom in canvas header.
 - Keyboard: `/` focuses search, `G` opens briefing, Enter/Space opens evidence, Escape closes overlays.
 - Reduced motion: no essential information relies on animation.

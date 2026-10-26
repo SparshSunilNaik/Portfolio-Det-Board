@@ -3,11 +3,29 @@ import type { Category, Project, Relationship } from '../types'
 const gh = (repo: string) => ({ label: 'Repository', url: `https://github.com/SparshSunilNaik/${repo}`, kind: 'repository' as const })
 
 export const categories: { id: Category | 'all'; label: string }[] = [
-  { id: 'all', label: 'All evidence' }, { id: 'robotics', label: 'Autonomy' }, { id: 'infrastructure', label: 'Infrastructure' },
+  { id: 'all', label: 'All evidence' }, { id: 'experience', label: 'Professional experience' }, { id: 'robotics', label: 'Autonomy' }, { id: 'infrastructure', label: 'Infrastructure' },
   { id: 'agents', label: 'Agents & RAG' }, { id: 'research', label: 'ML research' }, { id: 'achievement', label: 'Achievements' }, { id: 'education', label: 'Foundations' },
 ]
 
 export const projects: Project[] = [
+  {
+    id:'entropy-systems', caseNo:'E-001', title:'Entropy Systems — Software Engineering Internship', shortTitle:'Entropy Systems', category:'experience', status:'Employment', year:'JUL 2026 — PRESENT*', kind:'dossier', featured:true, recordType:'experience', employer:'Entropy Systems', jobTitle:'Software Engineering Intern', employmentDates:'July 2026 – Present (start month owner-provided; active affiliation publicly listed)',
+    position:{x:1045,y:570,width:390,height:315,rotation:-1.4}, summary:'Software engineering internship contributing to computer-vision modules, software services, integration, testing, and engineering documentation.',
+    problem:'Translate engineering requirements into working, testable software components inside an active robotics-engineering environment.',
+    engineered:['Built and evaluated computer-vision modules and software services for AI-driven pipelines','Participated in software-component integration and automated test validation','Supported debugging, troubleshooting, and technical documentation'],
+    approach:['Bridge algorithms and application software through testable implementations','Validate components during integration rather than treating models as isolated demos'],
+    challenges:['Integrating AI and software components across an evolving engineering system','Diagnosing implementation and test failures without overstating confidential work'],
+    results:['Public portfolio confirms computer-vision, software-service, integration, testing, and documentation contributions','No performance metrics or customer outcomes are claimed'],
+    technologies:['Python','Computer Vision','AI Systems','Software Engineering','Test Automation'], links:[{label:'Company profile',url:'https://www.linkedin.com/company/entropy-systems-org/',kind:'profile'}], source:'Owner-provided prior résumé date + public personal portfolio + Entropy Systems LinkedIn employee listing'
+  },
+  {
+    id:'entropy-assignment', caseNo:'E-001/A', title:'Engineering Assignment Record — Vision & Software Integration', shortTitle:'Assignment Record', category:'experience', status:'Supporting evidence', year:'2026', kind:'note', recordType:'assignment', employer:'Entropy Systems', jobTitle:'Technical Contribution Record', employmentDates:'During Software Engineering Internship',
+    position:{x:1110,y:920,width:330,height:235,rotation:2.2}, summary:'A bounded record of verified contribution areas: computer vision, backend software, integration, test validation, debugging, and documentation.',
+    problem:'Capture professional contribution areas without exposing private source, customer information, or unverified ownership claims.',
+    engineered:['Computer-vision pipeline modules','Backend and application functionality','Integration, automated tests, debugging, and documentation'],
+    approach:['Publish contribution boundaries rather than proprietary implementation details'], challenges:['Separating public evidence from confidential engineering context'],
+    results:['Contribution scope is documented; specific client systems and metrics remain intentionally undisclosed'], technologies:['Python','Computer Vision','Backend Development','Testing','Documentation'], links:[], source:'Public personal portfolio; scoped to non-confidential contribution areas'
+  },
   {
     id:'egonav', caseNo:'R-01', title:'Vision-Language-Action Autonomous Robotics System', shortTitle:'EgoNav VLA', category:'robotics', status:'Built', year:'2026', kind:'polaroid', featured:true,
     position:{x:420,y:390,width:390,height:320,rotation:-2.2}, summary:'A hybrid perception-to-action platform for zero-shot indoor object-goal navigation on consumer hardware.',
@@ -108,6 +126,7 @@ export const projects: Project[] = [
 ]
 
 export const relationships: Relationship[] = [
+  {id:'entropy-assignment-record',source:'entropy-assignment',target:'entropy-systems',type:'engineered-at',label:'ENGINEERED_AT',note:'The assignment record documents contribution areas performed during the Entropy Systems internship.'},
   {id:'e-p',source:'egonav',target:'polaris',type:'informs',label:'confidence-aware autonomy',note:'Both separate deliberative perception from bounded safety and recovery control.'},
   {id:'p-g',source:'polaris',target:'gpu-platform',type:'shares-method',label:'simulation → compute',note:'Autonomy validation and accelerated workloads both depend on reproducible infrastructure.'},
   {id:'g-n',source:'gpu-platform',target:'network-slicing',type:'extends',label:'Kubernetes orchestration',note:'Shared cluster scheduling, telemetry, and adaptive resource-allocation methods.'},

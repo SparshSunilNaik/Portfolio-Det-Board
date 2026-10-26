@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 64" role="img" aria-labelledby="title desc">
-  <title id="title">SSN monogram</title><desc id="desc">Geometric initials crossed by a crimson evidence thread</desc>
-  <rect width="128" height="64" rx="2" fill="#171815"/>
-  <path d="M5 20V7h13M110 7h13v13M123 48v9h-13M18 57H5v-9" fill="none" stroke="#67685f" stroke-width="2"/>
-  <path d="M14 18h27v12H17v16h27M49 18h26v12H52v16h27M85 46V18l27 28V18" fill="none" stroke="#eee7d8" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
-  <path d="M8 53C31 44 44 58 64 51s34-13 56-3" fill="none" stroke="#a33d37" stroke-width="2"/>
-  <g fill="#a33d37" stroke="#e08a7f" stroke-width="1"><circle cx="8" cy="53" r="3"/><circle cx="64" cy="51" r="3"/><circle cx="120" cy="48" r="3"/></g>
-</svg>

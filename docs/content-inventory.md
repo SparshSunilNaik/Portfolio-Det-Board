@@ -39,6 +39,19 @@ Verified public identity links:
 | M-05 | Smart helmet activity classification | Prototype | Resume | None verified |
 | X-01 | THE-WEB | Built | Public repository and deployment | Repository + live site |
 
+## Professional experience evidence
+
+Professional experience is modeled separately from personal projects and leadership.
+
+| ID | Record | Public status | Provenance |
+| --- | --- | --- | --- |
+| E-001 | Entropy Systems — Software Engineering Intern | Active affiliation publicly listed | Owner-provided prior résumé date; [Entropy Systems LinkedIn company page](https://www.linkedin.com/company/entropy-systems-org/) lists Sparsh Naik as an employee; [public personal portfolio](https://sparshsunilnaik.tech/) identifies the role and contribution areas |
+| E-001/A | Vision & Software Integration assignment record | Supporting evidence | Public personal portfolio description, bounded to computer vision, software services, integration, test validation, debugging, and documentation |
+
+The July 2026 start month comes from the owner-provided previous résumé and is not independently visible on the public company listing. The company listing supports active affiliation; the public personal portfolio supports the role and scoped technical contributions. No customer details, private source, performance metrics, or business outcomes are published.
+
+No Entropy employment record is connected to EgoNav, Polaris, or another personal project because available evidence does not establish that those projects were employer work. The typed `ENGINEERED_AT` relationship connects the employment record only to its bounded assignment record.
+
 ## Verified achievements and education
 
 - COMSIA 2026 Best Paper Award for Dynamic Pricing using Reinforcement Learning; resume also states accepted for publication. No publication URL is claimed.

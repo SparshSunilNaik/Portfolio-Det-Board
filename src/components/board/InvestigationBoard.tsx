@@ -7,6 +7,7 @@ import type { Camera, Category } from '../../types'
 import { EvidenceCard } from './EvidenceCard'
 import { IdentityDossier } from './IdentityDossier'
 import { ThreadLayer } from './ThreadLayer'
+import { BoardAtmosphere } from './BoardAtmosphere'
 
 interface Props {camera:Camera;setCamera:Dispatch<SetStateAction<Camera>>;selectedId:string|null;onSelect:(id:string|null)=>void;category:Category|'all';query:string;focusRequest:{id:string;nonce:number}|null}
 export function InvestigationBoard({camera,setCamera,selectedId,onSelect,category,query,focusRequest}:Props){
@@ -23,7 +24,8 @@ export function InvestigationBoard({camera,setCamera,selectedId,onSelect,categor
   const first=projects.find(p=>p.featured)!
   return <div className={`board-viewport ${dragging?'is-dragging':''}`} ref={shell} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={wheel} onClick={(e)=>{if(!(e.target as HTMLElement).closest('.evidence,.identity-dossier'))onSelect(null)}}>
     <div className="board" style={{width:BOARD.width,height:BOARD.height,transform:`translate3d(${camera.x}px,${camera.y}px,0) scale(${camera.scale})`}}>
-      <div className="zone zone--robotics"><b>A / AUTONOMOUS SYSTEMS</b></div><div className="zone zone--infra"><b>B / INFRASTRUCTURE &amp; CLOUD</b></div><div className="zone zone--agents"><b>C / AGENTS &amp; RETRIEVAL</b></div><div className="zone zone--research"><b>D / MACHINE LEARNING RESEARCH</b></div>
+      <BoardAtmosphere/>
+      <div className="zone zone--experience"><b>PROFESSIONAL EXPERIENCE — CASE FILES</b></div><div className="zone zone--robotics"><b>A / AUTONOMOUS SYSTEMS</b></div><div className="zone zone--infra"><b>B / INFRASTRUCTURE &amp; CLOUD</b></div><div className="zone zone--agents"><b>C / AGENTS &amp; RETRIEVAL</b></div><div className="zone zone--research"><b>D / MACHINE LEARNING RESEARCH</b></div>
       <ThreadLayer selectedId={selectedId}/>
       <div style={{position:'absolute',left:identity.x,top:identity.y,width:identity.width,height:identity.height,transform:`rotate(${identity.rotation}deg)`}}><IdentityDossier onOverview={()=>document.dispatchEvent(new CustomEvent('open-overview'))} onProject={()=>onSelect(first.id)}/></div>
       {projects.map(project=><EvidenceCard key={project.id} project={project} selected={selectedId===project.id} dimmed={!visible.has(project.id)||(selectedId!==null&&project.id!==selectedId&&!related.has(project.id))} onSelect={onSelect} onPointerDown={e=>e.stopPropagation()}/>) }

@@ -6,6 +6,8 @@ The desktop board uses one 4000×3100 coordinate space transformed by a camera `
 
 On screens below 760px the canvas becomes a fixed visual header and the navigator becomes a full, readable project index. Dossiers remain bottom-sheet-like overlays. This avoids requiring mobile visitors to read tiny evidence on a desktop canvas.
 
+COBOT remains a normal validated project node with a typed `shares-method` edge to SplitBrain-RAG. Its `agents` category and system schematic reflect the repository evidence; spatial placement near autonomy does not reclassify it as a physical robotics platform.
+
 Key modules:
 
 - `src/data/`: evidence, technologies, status, provenance, and relationships.

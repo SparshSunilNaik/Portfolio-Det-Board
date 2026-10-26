@@ -1,6 +1,6 @@
 # SparshSunilNaik — Engineering Portfolio
 
-CASE 000 is an interactive detective-board investigation of autonomous systems, infrastructure, AI agents, RAG, and machine-learning research.
+CASE 000 is an interactive detective-board investigation of autonomous systems, infrastructure, AI agents, RAG, academic assessment engineering, and machine-learning research. Featured case files include COBOT, EgoNav, Polaris, and the Entropy Systems professional record.
 
 ## Development
 

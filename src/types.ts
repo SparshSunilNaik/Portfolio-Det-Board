@@ -9,6 +9,7 @@ export interface Project {
   id: string; caseNo: string; title: string; shortTitle: string; category: Category; status: ProjectStatus; year: string
   kind: EvidenceKind; position: Position; featured?: boolean; summary: string; problem: string; engineered: string[]
   approach: string[]; challenges: string[]; results: string[]; technologies: string[]; links: Link[]; source: string
+  projectRole?: string
   recordType?: 'project' | 'experience' | 'assignment'; employer?: string; jobTitle?: string; employmentDates?: string
 }
 export interface Relationship { id: string; source: string; target: string; type: RelationType; label: string; note: string }

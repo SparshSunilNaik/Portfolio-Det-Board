@@ -27,6 +27,17 @@ export const projects: Project[] = [
     results:['Contribution scope is documented; specific client systems and metrics remain intentionally undisclosed'], technologies:['Python','Computer Vision','Backend Development','Testing','Documentation'], links:[], source:'Public personal portfolio; scoped to non-confidential contribution areas'
   },
   {
+    id:'cobot', caseNo:'R-03', title:'COBOT — Collaborative Project Assessment Bot', shortTitle:'COBOT', category:'agents', status:'In development', year:'2026', kind:'blueprint', featured:true,
+    position:{x:1010,y:1190,width:440,height:345,rotation:-1.1}, summary:'A faculty-controlled academic assessment platform that grounds adaptive vivas and evaluations in bounded project evidence.',
+    projectRole:'Full-stack and AI systems contributor; repository history also records collaborators, so sole authorship is not claimed.',
+    problem:'Assess individual understanding and contribution within team projects while preserving faculty authority, project boundaries, and evidence traceability.',
+    engineered:['Next.js faculty/student workflows backed by FastAPI services','Bounded static GitHub ingestion that never executes student repositories','Adaptive viva and mixed-assessment workflows using local Ollama inference','Hierarchical role and project authorization, faculty approvals, retests, and published results'],
+    approach:['Separate deterministic assessment control from bounded LLM question generation','Use opaque revocable HttpOnly sessions and backend-enforced project/team scope','Persist academic workflows with SQLAlchemy, SQLite WAL, and Alembic migrations'],
+    challenges:['Grounding questions in approved project and curriculum evidence','Coordinating concurrent local-model requests without duplicate questions','Maintaining isolation across students, teams, projects, departments, and colleges'],
+    results:['Private repository documents production Next.js and FastAPI startup workflows','Repository includes extensive backend and frontend verification suites','Current workstation configuration documents bounded concurrent local inference; no public deployment is claimed'],
+    technologies:['Python','FastAPI','Next.js','TypeScript','SQLAlchemy','Alembic','SQLite','Ollama','Qwen3','RBAC'], links:[], source:'Private Cobot repository README, architecture documentation, code tree, and commit history reviewed 2026-10-26'
+  },
+  {
     id:'egonav', caseNo:'R-01', title:'Vision-Language-Action Autonomous Robotics System', shortTitle:'EgoNav VLA', category:'robotics', status:'Built', year:'2026', kind:'polaroid', featured:true,
     position:{x:420,y:390,width:390,height:320,rotation:-2.2}, summary:'A hybrid perception-to-action platform for zero-shot indoor object-goal navigation on consumer hardware.',
     problem:'Navigate toward natural-language object goals without task-specific training or a pre-built map while keeping slow VLM inference from compromising safety.',
@@ -127,6 +138,7 @@ export const projects: Project[] = [
 
 export const relationships: Relationship[] = [
   {id:'entropy-assignment-record',source:'entropy-assignment',target:'entropy-systems',type:'engineered-at',label:'ENGINEERED_AT',note:'The assignment record documents contribution areas performed during the Entropy Systems internship.'},
+  {id:'cobot-splitbrain-local-inference',source:'cobot',target:'splitbrain',type:'shares-method',label:'local inference boundary',note:'Both systems place local Ollama inference behind an explicit application-service boundary; their products and data flows remain distinct.'},
   {id:'e-p',source:'egonav',target:'polaris',type:'informs',label:'confidence-aware autonomy',note:'Both separate deliberative perception from bounded safety and recovery control.'},
   {id:'p-g',source:'polaris',target:'gpu-platform',type:'shares-method',label:'simulation → compute',note:'Autonomy validation and accelerated workloads both depend on reproducible infrastructure.'},
   {id:'g-n',source:'gpu-platform',target:'network-slicing',type:'extends',label:'Kubernetes orchestration',note:'Shared cluster scheduling, telemetry, and adaptive resource-allocation methods.'},
@@ -145,5 +157,5 @@ export const achievements = [
   { value:'BEST PAPER', label:'COMSIA 2026 · Dynamic Pricing using RL' },
   { value:'#17 GLOBAL', label:'Women in Data Science Datathon' },
   { value:'9.00 / 10', label:'B.E. CSE (Artificial Intelligence) CGPA' },
-  { value:'PRESIDENT', label:'Data Science Club · 2025–Present' },
+  { value:'FORMER PRESIDENT', label:'Data Science Club' },
 ]

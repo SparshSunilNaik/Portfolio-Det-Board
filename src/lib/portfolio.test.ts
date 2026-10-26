@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { projects, relationships } from '../data/projects'
+import { achievements, projects, relationships } from '../data/projects'
 import { BOARD, clampScale, fitCamera, focusCamera, screenToBoard, zoomAt } from './board'
 import { validateGraph } from './graph'
 import { filterProjects } from './search'
@@ -8,6 +8,9 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { Dossier } from '../components/dossiers/Dossier'
 import { GuidedOverview } from '../components/dossiers/GuidedOverview'
+import { EvidenceCard } from '../components/board/EvidenceCard'
+import indexHtml from '../../index.html?raw'
+import spiderLogo from '../../public/brand/case-spider.svg?raw'
 
 describe('portfolio evidence graph',()=>{
   it('has unique, complete project metadata and valid relationships',()=>{expect(validateGraph(projects,relationships)).toEqual({valid:true,errors:[]})})
@@ -34,6 +37,22 @@ describe('professional experience evidence',()=>{
   it('uses a typed, valid professional relationship without attributing a personal project',()=>{const edge=relationships.find(item=>item.id==='entropy-assignment-record');expect(edge?.type).toBe('engineered-at');expect([edge?.source,edge?.target]).toEqual(expect.arrayContaining(['entropy-systems','entropy-assignment']));expect(relationships.filter(item=>(item.source==='entropy-systems'||item.target==='entropy-systems')&&item.id!=='entropy-assignment-record')).toHaveLength(0)})
   it('renders the professional dossier fields',()=>{const html=renderToStaticMarkup(createElement(Dossier,{project:employment,onClose:()=>undefined,onFocus:()=>undefined}));expect(html).toContain('PROFESSIONAL CASE FILE');expect(html).toContain('Software Engineering Intern');expect(html).toContain('Entropy Systems');expect(html).toContain('Responsibilities &amp; contributions')})
   it('includes employment in the guided recruiter briefing',()=>{const html=renderToStaticMarkup(createElement(GuidedOverview,{onClose:()=>undefined,onFocus:()=>undefined}));expect(html).toContain('PROFESSIONAL EXPERIENCE');expect(html).toContain('Entropy Systems');expect(html).toContain('OPEN EMPLOYMENT FILE')})
+})
+
+describe('COBOT evidence',()=>{
+  const cobot=projects.find(project=>project.id==='cobot')!
+  it('contains complete, conservative project metadata',()=>{expect(cobot.caseNo).toBe('R-03');expect(cobot.title).toContain('Collaborative Project Assessment Bot');expect(cobot.category).toBe('agents');expect(cobot.featured).toBe(true);expect(cobot.projectRole).toContain('contributor');expect(cobot.technologies).toEqual(expect.arrayContaining(['FastAPI','Next.js','Ollama','SQLite']));expect(cobot.links).toEqual([])})
+  it('is searchable by name, capability, and technology',()=>{expect(filterProjects(projects,'COBOT','all')).toContain(cobot);expect(filterProjects(projects,'adaptive viva','all')).toContain(cobot);expect(filterProjects(projects,'Alembic','agents')).toContain(cobot)})
+  it('has a valid evidence-backed local inference relationship',()=>{const edge=relationships.find(item=>item.id==='cobot-splitbrain-local-inference');expect(edge?.type).toBe('shares-method');expect([edge?.source,edge?.target]).toEqual(expect.arrayContaining(['cobot','splitbrain']))})
+  it('renders first in the guided featured sequence',()=>{const html=renderToStaticMarkup(createElement(GuidedOverview,{onClose:()=>undefined,onFocus:()=>undefined}));expect(html).toContain('COBOT');expect(html.indexOf('COBOT')).toBeLessThan(html.indexOf('EgoNav VLA'))})
+  it('renders a distinctive system schematic and full dossier role',()=>{const card=renderToStaticMarkup(createElement(EvidenceCard,{project:cobot,selected:false,dimmed:false,onSelect:()=>undefined,onPointerDown:()=>undefined}));const dossier=renderToStaticMarkup(createElement(Dossier,{project:cobot,onClose:()=>undefined,onFocus:()=>undefined}));expect(card).toContain('evidence--cobot');expect(card).toContain('BROWSER');expect(card).toContain('OLLAMA');expect(dossier).toContain('PERSONAL ROLE');expect(dossier).toContain('No public project link verified')})
+})
+
+describe('Phase 4 content and identity corrections',()=>{
+  const publicCopy=JSON.stringify({projects,achievements})+renderToStaticMarkup(createElement(GuidedOverview,{onClose:()=>undefined,onFocus:()=>undefined}))+indexHtml
+  it('uses former-president wording without an ongoing presidency',()=>{expect(publicCopy).toContain('FORMER PRESIDENT');expect(publicCopy).toContain('Former President');expect(publicCopy).not.toMatch(/Data Science Club[^.\"<]*(Present|present)/)})
+  it('does not present unconfirmed Ignis employment',()=>{expect(publicCopy.toLocaleLowerCase()).not.toContain('ignis')})
+  it('references the new spider favicon and no obsolete eye identity',()=>{expect(indexHtml).toContain('brand/case-spider-favicon.svg');expect(indexHtml.toLocaleLowerCase()).not.toContain('watchful');expect(spiderLogo).toContain('CASE spider emblem');expect(spiderLogo).toContain('#a33d37')})
 })
 
 describe('board coordinate transforms',()=>{

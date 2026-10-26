@@ -1,12 +1,12 @@
 export function BrandLogo({ className = '' }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 128 64" role="img" aria-label="Watchful eyes investigation emblem">
-    <title>Watchful eyes — SparshSunilNaik</title>
+  return <svg className={className} viewBox="0 0 128 64" role="img" aria-label="Angular spider investigation emblem">
+    <title>CASE spider — SparshSunilNaik</title>
     <path className="brand-logo__frame" d="M5 20V7h13M110 7h13v13M123 45v12h-13M18 57H5V45" />
-    <path className="brand-logo__brow" d="M12 20 51 14M77 14l39 6" />
-    <path className="brand-logo__eye" d="M10 31Q27 18 55 27 35 47 10 31ZM118 31Q101 18 73 27q20 20 45 4Z" />
-    <ellipse className="brand-logo__iris" cx="38" cy="30" rx="7" ry="9"/><ellipse className="brand-logo__iris" cx="90" cy="30" rx="7" ry="9"/>
-    <circle className="brand-logo__pupil" cx="40" cy="30" r="3"/><circle className="brand-logo__pupil" cx="88" cy="30" r="3"/>
-    <path className="brand-logo__thread" d="M8 52C31 45 45 58 64 51s34-12 56-3" />
-    <circle className="brand-logo__node" cx="8" cy="52" r="3" /><circle className="brand-logo__node" cx="64" cy="51" r="3" /><circle className="brand-logo__node" cx="120" cy="48" r="3" />
+    <path className="brand-logo__legs" d="M57 24 43 15 27 18M55 28 39 25 22 30M55 33 39 39 27 49M58 36 47 50 43 59M71 24 85 15 101 18M73 28 89 25 106 30M73 33 89 39 101 49M70 36 81 50 85 59" />
+    <path className="brand-logo__abdomen" d="M64 17c-9 0-13 8-11 17 2 8 7 13 11 17 4-4 9-9 11-17 2-9-2-17-11-17Z" />
+    <path className="brand-logo__thorax" d="M64 14 72 22 64 29 56 22Z" />
+    <path className="brand-logo__spine" d="M64 20v25M59 31h10M57 38h14" />
+    <path className="brand-logo__thread" d="M64 51v7M64 58c17-8 36-8 55-2" />
+    <circle className="brand-logo__node" cx="119" cy="56" r="3" />
   </svg>
 }

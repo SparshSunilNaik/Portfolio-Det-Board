@@ -1,5 +1,5 @@
 export type Category = 'experience' | 'robotics' | 'infrastructure' | 'agents' | 'research' | 'achievement' | 'education'
-export type ProjectStatus = 'Employment' | 'Built' | 'Research' | 'In development' | 'Prototype' | 'Supporting evidence'
+export type ProjectStatus = 'Current' | 'Completed' | 'Built' | 'Research' | 'In development' | 'Prototype' | 'Supporting evidence'
 export type EvidenceKind = 'dossier' | 'polaroid' | 'terminal' | 'blueprint' | 'report' | 'clipping' | 'telemetry' | 'note'
 export type RelationType = 'powers' | 'extends' | 'shares-method' | 'validates' | 'informs' | 'documents' | 'engineered-at' | 'contributed-to' | 'related-work'
 

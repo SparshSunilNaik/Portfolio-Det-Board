@@ -21,7 +21,7 @@ export function InvestigationBoard({camera,setCamera,selectedId,onSelect,categor
   const wheel=(e:WheelEvent<HTMLDivElement>)=>{e.preventDefault();const p=local(e);setCamera(c=>zoomAt(c,p.x,p.y,c.scale*Math.exp(-e.deltaY*.0012)))}
   const fit=()=>{const b=shell.current!.getBoundingClientRect();setCamera(fitCamera(b.width,b.height))}
   const identity={x:1510,y:850,width:900,height:650,rotation:-.4}
-  const first=projects.find(p=>p.featured)!
+  const first=projects.find(p=>p.id==='cobot')!
   return <div className={`board-viewport ${dragging?'is-dragging':''}`} ref={shell} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={wheel} onClick={(e)=>{if(!(e.target as HTMLElement).closest('.evidence,.identity-dossier'))onSelect(null)}}>
     <div className="board" style={{width:BOARD.width,height:BOARD.height,transform:`translate3d(${camera.x}px,${camera.y}px,0) scale(${camera.scale})`}}>
       <BoardAtmosphere/>

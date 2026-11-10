@@ -9,7 +9,7 @@ export function Dossier({project,onClose,onFocus}:{project:Project|null;onClose:
   const edges=relationships.filter(e=>e.source===project.id||e.target===project.id)
   const professional=project.recordType==='experience'||project.recordType==='assignment'
   return <div className="dossier-backdrop" role="presentation" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}>
-    <article className={`project-dossier ${professional?'project-dossier--experience':''}`} role="dialog" aria-modal="true" aria-labelledby="dossier-title" tabIndex={-1} ref={ref}>
+    <article className={`project-dossier ${professional?'project-dossier--experience':''} ${project.status==='Current'?'project-dossier--current':''}`} role="dialog" aria-modal="true" aria-labelledby="dossier-title" tabIndex={-1} ref={ref}>
       <button className="dossier-close" onClick={onClose} aria-label="Close dossier">×</button>
       <header><div><span>{project.caseNo} · {professional?'PROFESSIONAL CASE FILE':project.category.toUpperCase()}</span><h2 id="dossier-title">{project.title}</h2><p>{project.summary}</p></div><div className="status-block"><b>{project.status}</b><small>{project.year}</small></div></header>
       {professional&&<dl className="experience-facts"><div><dt>EMPLOYER</dt><dd>{project.employer}</dd></div><div><dt>ROLE / RECORD</dt><dd>{project.jobTitle}</dd></div><div><dt>DATES</dt><dd>{project.employmentDates}</dd></div></dl>}

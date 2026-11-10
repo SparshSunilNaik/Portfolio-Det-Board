@@ -1,6 +1,6 @@
 # CASE 000 content inventory
 
-Reviewed: 2026-10-26. The portfolio separates claims from presentation in `src/data/projects.ts`.
+Reviewed: 2026-11-10. The portfolio separates claims from presentation in `src/data/projects.ts`.
 
 ## Sources and handling
 
@@ -67,12 +67,13 @@ Professional experience is modeled separately from personal projects and leaders
 
 | ID | Record | Public status | Provenance |
 | --- | --- | --- | --- |
-| E-001 | Entropy Systems — Software Engineering Intern | Active affiliation publicly listed | Owner-provided prior résumé date; [Entropy Systems LinkedIn company page](https://www.linkedin.com/company/entropy-systems-org/) lists Sparsh Naik as an employee; [public personal portfolio](https://sparshsunilnaik.tech/) identifies the role and contribution areas |
-| E-001/A | Vision & Software Integration assignment record | Supporting evidence | Public personal portfolio description, bounded to computer vision, software services, integration, test validation, debugging, and documentation |
+| E-002 | Elma Labs — SmartGlass Systems Engineering | Current; descriptive scope, not a claimed contractual title | Owner confirmation plus authenticated review of the private SmartGlass OS repository, architecture documentation, CI configuration, code tree, and Sparsh's commit history on 2026-11-10 |
+| E-001 | Entropy Systems — Software Engineering Intern | Completed in 2026 | Owner-confirmed transition and approximate 4.5-month duration; prior résumé verifies the July 2026 start; public Polaris and Polaris Ground histories support the contribution scope |
+| E-001/A | Polaris & Software Integration assignment record | Supporting evidence | Owner-confirmed professional scope plus public Polaris and Polaris Ground repositories, bounded to non-confidential engineering contributions |
 
-The July 2026 start month comes from the owner-provided previous résumé and is not independently visible on the public company listing. The company listing supports active affiliation; the public personal portfolio supports the role and scoped technical contributions. No customer details, private source, performance metrics, or business outcomes are published.
+Elma Labs is current, but neither an official contractual title nor an employment start month was available in the reviewed records. The portfolio therefore uses **SmartGlass Systems Engineering (descriptive scope)** and the conservative range **2026–Present**. The evidence verifies a portable C core, modular ESP-IDF/FreeRTOS architecture for ESP32-S3, lifecycle and state contracts, deterministic HUD and annotation layers, QEMU and host simulation, webcam and YOLOv8n host/browser workflows, shared rendering contracts, automated tests, firmware build checks, and CI. ESP32-S3 firmware is compile- and QEMU-verified; physical SmartGlass hardware, display, embedded camera, power behavior, production readiness, consumer deployment, and hardware performance are not claimed.
 
-No Entropy employment record is connected to EgoNav, Polaris, or another personal project because available evidence does not establish that those projects were employer work. The typed `ENGINEERED_AT` relationship connects the employment record only to its bounded assignment record.
+Entropy's July 2026 start is retained from the prior résumé. The owner confirms the engagement is complete, lasted approximately 4.5 months, and included Polaris and Polaris Ground. Because the exact end month could not be independently verified, the public range remains **July 2026–2026** rather than inferring a month. A typed `CONTRIBUTED_TO` relationship connects Entropy only to Polaris, while the bounded assignment record names both Polaris codebases. No customer details, confidential source, credentials, private infrastructure, hardware metrics, or business outcomes are published.
 
 ## Verified achievements and education
 

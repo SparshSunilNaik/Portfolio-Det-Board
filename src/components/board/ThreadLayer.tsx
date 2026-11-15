@@ -1,10 +1,11 @@
 import { memo } from 'react'
 import { projects, relationships } from '../../data/projects'
 
-export const ThreadLayer=memo(function ThreadLayer({selectedId}:{selectedId:string|null}){
+export const ThreadLayer=memo(function ThreadLayer({selectedId,previewId=null}:{selectedId:string|null;previewId?:string|null}){
   const byId=new Map(projects.map(p=>[p.id,p]))
+  const focusId=selectedId??previewId
   return <svg className="thread-layer" viewBox="0 0 4000 3100" aria-hidden="true">
     <defs><filter id="thread-shadow"><feDropShadow dx="2" dy="3" stdDeviation="2" floodOpacity=".5"/></filter></defs>
-    {relationships.map((edge,index)=>{const a=byId.get(edge.source)!,b=byId.get(edge.target)!;const x1=a.position.x+a.position.width/2,y1=a.position.y+a.position.height/2,x2=b.position.x+b.position.width/2,y2=b.position.y+b.position.height/2;const curve=(index%2?1:-1)*Math.min(180,Math.abs(x2-x1)*.18+40);const d=`M${x1} ${y1} C${x1+curve} ${y1-curve},${x2-curve} ${y2+curve},${x2} ${y2}`;const active=!selectedId||edge.source===selectedId||edge.target===selectedId;const focused=Boolean(selectedId)&&active;const labelWidth=Math.max(150,edge.label.length*12+28),mx=(x1+x2)/2,my=(y1+y2)/2;return <g className={`thread thread--${edge.type} ${active?'is-active':'is-muted'} ${focused?'is-focused':''}`} key={edge.id}><path d={d}/><circle cx={x1} cy={y1} r="8"/><circle cx={x2} cy={y2} r="8"/>{focused&&<g className="thread-label" transform={`translate(${mx-labelWidth/2} ${my-18})`}><rect width={labelWidth} height="36" rx="3"/><text x={labelWidth/2} y="23" textAnchor="middle">{edge.label.toUpperCase()}</text></g>}</g>})}
+    {relationships.map((edge,index)=>{const a=byId.get(edge.source)!,b=byId.get(edge.target)!;const x1=a.position.x+a.position.width/2,y1=a.position.y+a.position.height/2,x2=b.position.x+b.position.width/2,y2=b.position.y+b.position.height/2;const curve=(index%2?1:-1)*Math.min(180,Math.abs(x2-x1)*.18+40);const d=`M${x1} ${y1} C${x1+curve} ${y1-curve},${x2-curve} ${y2+curve},${x2} ${y2}`;const active=!focusId||edge.source===focusId||edge.target===focusId;const focused=Boolean(selectedId)&&active;const previewed=!selectedId&&Boolean(previewId)&&active;const labelWidth=Math.max(150,edge.label.length*12+28),mx=(x1+x2)/2,my=(y1+y2)/2;return <g className={`thread thread--${edge.type} ${active?'is-active':'is-muted'} ${focused?'is-focused':''} ${previewed?'is-preview':''}`} key={edge.id}><path d={d}/><circle cx={x1} cy={y1} r="8"/><circle cx={x2} cy={y2} r="8"/>{focused&&<g className="thread-label" transform={`translate(${mx-labelWidth/2} ${my-18})`}><rect width={labelWidth} height="36" rx="3"/><text x={labelWidth/2} y="23" textAnchor="middle">{edge.label.toUpperCase()}</text></g>}</g>})}
   </svg>
 })

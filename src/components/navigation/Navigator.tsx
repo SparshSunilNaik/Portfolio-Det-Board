@@ -25,6 +25,10 @@ export function Navigator({query,setQuery,category,setCategory,selectedId,onFocu
       </div>
     </nav>
     <div className="zoom-controls" aria-label="Board view controls"><button onClick={()=>zoom(1.18)} aria-label="Zoom in">+</button><output>{Math.round(camera.scale*100)}%</output><button onClick={()=>zoom(.84)} aria-label="Zoom out">−</button><button onClick={()=>setCamera(fitCamera(innerWidth,innerHeight))}>⌗</button></div>
-    <div className="minimap" aria-hidden="true"><div className="mini-board">{projects.filter(p=>p.featured).map(p=><i key={p.id} style={{left:`${p.position.x/BOARD.width*100}%`,top:`${p.position.y/BOARD.height*100}%`}}/>)}<span style={{width:`${Math.min(100,innerWidth/camera.scale/BOARD.width*100)}%`,height:`${Math.min(100,innerHeight/camera.scale/BOARD.height*100)}%`,left:`${Math.max(0,-camera.x/camera.scale/BOARD.width*100)}%`,top:`${Math.max(0,-camera.y/camera.scale/BOARD.height*100)}%`}}/></div></div>
+    <div className="minimap" aria-hidden="true">
+      <div className="locator-header"><span>BOARD LOCATOR</span><small><i/>LIVE</small></div>
+      <div className="mini-board">{projects.filter(p=>p.featured).map(p=><i className={`mini-node mini-node--${p.category}`} key={p.id} style={{left:`${p.position.x/BOARD.width*100}%`,top:`${p.position.y/BOARD.height*100}%`}}/>)}<span className="mini-viewport" style={{width:`${Math.min(100,innerWidth/camera.scale/BOARD.width*100)}%`,height:`${Math.min(100,innerHeight/camera.scale/BOARD.height*100)}%`,left:`${Math.max(0,-camera.x/camera.scale/BOARD.width*100)}%`,top:`${Math.max(0,-camera.y/camera.scale/BOARD.height*100)}%`}}/></div>
+      <div className="locator-footer"><span>CASE GRID / 4K×3.1K</span><b>SYS 00</b></div>
+    </div>
   </>
 }

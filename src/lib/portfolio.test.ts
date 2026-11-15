@@ -15,6 +15,7 @@ import { INITIAL_CAMERA } from '../App'
 import { CaseIntake } from '../components/intake/CaseIntake'
 import { FindingsLedger } from '../components/findings/FindingsLedger'
 import { MobileEvidenceReel } from '../components/navigation/MobileEvidenceReel'
+import { Navigator } from '../components/navigation/Navigator'
 import { ProjectDiagram } from '../components/dossiers/ProjectDiagram'
 import { ThreadLayer } from '../components/board/ThreadLayer'
 import { CASE_INTAKE_SESSION_KEY, REDUCED_MOTION_QUERY, reducedMotionPreferred, resolveCaseIntake, shouldShowCaseIntake, type SessionStore } from './caseIntake'
@@ -103,4 +104,8 @@ describe('board coordinate transforms',()=>{
   it('preserves the board point beneath cursor while zooming',()=>{const camera={x:-200,y:-100,scale:.5};const before=screenToBoard(500,300,camera);const after=screenToBoard(500,300,zoomAt(camera,500,300,1));expect(after.x).toBeCloseTo(before.x);expect(after.y).toBeCloseTo(before.y)})
   it('clamps zoom bounds',()=>{expect(clampScale(0)).toBe(BOARD.minScale);expect(clampScale(9)).toBe(BOARD.maxScale)})
   it('fits the full board and centers focused projects',()=>{const fit=fitCamera(1000,700);expect(BOARD.width*fit.scale).toBeLessThanOrEqual(920);const p=projects[0];const camera=focusCamera(p.position,1200,800,1);expect((p.position.x+p.position.width/2)*camera.scale+camera.x).toBeCloseTo(600);expect((p.position.y+p.position.height/2)*camera.scale+camera.y).toBeCloseTo(400)})
+})
+
+describe('CASE 000 board locator',()=>{
+  it('preserves the featured evidence overview and live camera viewport',()=>{Object.defineProperties(globalThis,{innerWidth:{value:1440,configurable:true},innerHeight:{value:900,configurable:true}});const html=renderToStaticMarkup(createElement(Navigator,{query:'',setQuery:()=>undefined,category:'all',setCategory:()=>undefined,selectedId:null,onFocus:()=>undefined,onOverview:()=>undefined,camera:INITIAL_CAMERA,setCamera:()=>undefined}));expect(html).toContain('BOARD LOCATOR');expect(html).toContain('CASE GRID / 4K×3.1K');expect(html).toContain('mini-viewport');expect((html.match(/mini-node mini-node--/g)??[])).toHaveLength(projects.filter(project=>project.featured).length)})
 })

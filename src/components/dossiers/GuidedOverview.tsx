@@ -1,10 +1,14 @@
+import { useRef } from 'react'
 import { achievements, projects } from '../../data/projects'
 import { publicLinks } from '../../data/links'
 import { LinkedInIcon } from '../ui/SocialIcon'
+import { useModalFocus } from '../../lib/useModalFocus'
 
 const path=['cobot','egonav','polaris','network-slicing','sentinel','dynamic-pricing']
 export function GuidedOverview({onClose,onFocus}:{onClose:()=>void;onFocus:(id:string)=>void}){
-  return <div className="overview-backdrop"><article className="overview" role="dialog" aria-modal="true" aria-labelledby="overview-title"><button className="dossier-close" onClick={onClose} aria-label="Close briefing">×</button>
+  const ref=useRef<HTMLElement>(null)
+  useModalFocus(true,ref)
+  return <div className="overview-backdrop"><article className="overview" role="dialog" aria-modal="true" aria-labelledby="overview-title" tabIndex={-1} ref={ref}><button className="dossier-close" onClick={onClose} aria-label="Close briefing">×</button>
     <span className="eyebrow">RECRUITER BRIEF / 03 MIN READ</span><h2 id="overview-title">THE SHORT CASE</h2><nav className="overview-route" aria-label="Briefing route"><span>IDENTITY</span><i/> <span>EXPERIENCE</span><i/> <span>SYSTEMS</span><i/> <span>RESEARCH</span><i/> <span>CONTACT</span></nav><p className="lede">Sparsh is a Computer Science Engineering student specializing in AI who works across the full engineering path: perception and models, APIs and safety controls, containers and clusters, evaluation and operator interfaces.</p>
     <div className="achievement-strip">{achievements.map(a=><div key={a.value}><b>{a.value}</b><span>{a.label}</span></div>)}</div>
     <section className="experience-brief"><span>CURRENT EXPERIENCE · CASE E-002</span><div><h3>SmartGlass Systems Engineering · Elma Labs</h3><p>Developing a hardware-independent SmartGlass OS and computer-vision prototype across ESP32-S3 firmware, deterministic HUD rendering, simulation, host and browser detection workflows, automated tests, and CI.</p><button onClick={()=>onFocus('elma-labs')}>OPEN CURRENT FILE ↗</button><button className="experience-previous" onClick={()=>onFocus('entropy-systems')}>PREVIOUS: ENTROPY SYSTEMS ↗</button></div></section>

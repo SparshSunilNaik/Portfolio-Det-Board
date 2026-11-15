@@ -10,11 +10,12 @@ export interface ProjectFinding {
 }
 
 export function createProjectFinding(project: Project): ProjectFinding {
-  const qualified=[...project.results,...project.challenges].filter(item=>boundaryPattern.test(item))
+  const validation=project.results.slice(0,2)
+  const qualified=[...project.results.slice(2),...project.challenges].filter(item=>boundaryPattern.test(item)&&!validation.includes(item))
   return {
     mission:project.problem,
     implementation:project.engineered.slice(0,3),
-    validation:project.results.slice(0,2),
+    validation,
     boundary:qualified.length?qualified.slice(0,2):[`Evidence source: ${project.source}`],
   }
 }

@@ -1,11 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { projects, relationships } from '../../data/projects'
 import type { Project } from '../../types'
 import { ProjectDiagram } from './ProjectDiagram'
+import { useModalFocus } from '../../lib/useModalFocus'
 
 export function Dossier({project,onClose,onFocus}:{project:Project|null;onClose:()=>void;onFocus:(id:string)=>void}){
   const ref=useRef<HTMLDivElement>(null)
-  useEffect(()=>{if(project)setTimeout(()=>ref.current?.focus(),50)},[project])
+  useModalFocus(Boolean(project),ref)
   if(!project)return null
   const edges=relationships.filter(e=>e.source===project.id||e.target===project.id)
   const professional=project.recordType==='experience'||project.recordType==='assignment'

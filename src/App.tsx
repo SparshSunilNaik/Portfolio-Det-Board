@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { InvestigationBoard } from './components/board/InvestigationBoard'
 import { Dossier } from './components/dossiers/Dossier'
 import { GuidedOverview } from './components/dossiers/GuidedOverview'
@@ -13,6 +13,7 @@ import type { Camera, Category } from './types'
 export const INITIAL_CAMERA: Camera = { x: -690, y: -395, scale: .72 }
 
 export function App() {
+  const shell=useRef<HTMLElement>(null)
   const directProject=useMemo(()=>{const id=new URLSearchParams(location.hash.slice(1)).get('project');return projects.some(project=>project.id===id)?id:null},[])
   const [selectedId,setSelectedId]=useState<string|null>(directProject)
   const [dossierId,setDossierId]=useState<string|null>(directProject)
@@ -30,13 +31,13 @@ export function App() {
   const closeDossier=useCallback(()=>{setDossierId(null);setProjectHash(null)},[setProjectHash])
   const focus=(id:string)=>{setFocusRequest({id,nonce:Date.now()});selectEvidence(id)}
   const focusDossier=(id:string)=>{setFocusRequest({id,nonce:Date.now()});openDossier(id)}
-  const completeIntake=useCallback((action:CaseIntakeAction)=>{let store:Storage|null=null;try{store=sessionStorage}catch{store=null}setIntakeOpen(resolveCaseIntake(action,store).open)},[])
+  const completeIntake=useCallback((action:CaseIntakeAction)=>{let store:Storage|null=null;try{store=sessionStorage}catch{store=null}setIntakeOpen(resolveCaseIntake(action,store).open);requestAnimationFrame(()=>shell.current?.focus())},[])
 
   useEffect(()=>{const key=(event:KeyboardEvent)=>{if(event.key==='Escape'){if(overview)setOverview(false);else if(dossierId)closeDossier();else selectEvidence(null)} if(event.key==='/'&&!event.ctrlKey&&!event.metaKey){event.preventDefault();document.querySelector<HTMLInputElement>('#evidence-search')?.focus()} if(event.key.toLowerCase()==='g'&&!intakeOpen)setOverview(true)};addEventListener('keydown',key);return()=>removeEventListener('keydown',key)},[closeDossier,dossierId,intakeOpen,overview,selectEvidence])
   useEffect(()=>{const open=()=>setOverview(true);document.addEventListener('open-overview',open);return()=>document.removeEventListener('open-overview',open)},[])
 
   const counts=useMemo(()=>({projects:projects.filter(p=>!p.recordType||p.recordType==='project').length,currentExperience:projects.filter(p=>p.recordType==='experience'&&p.status==='Current').length,technologies:new Set(projects.flatMap(p=>p.technologies)).size}),[])
-  return <main className={`app-shell case-aperture-shell ${intakeOpen?'intake-is-open':''}`}>
+  return <main className={`app-shell case-aperture-shell ${intakeOpen?'intake-is-open':''}`} tabIndex={-1} ref={shell} data-focus-root>
     <a className="skip-link" href="#mobile-evidence">Skip to project index</a>
     <InvestigationBoard camera={camera} setCamera={setCamera} selectedId={selectedId} onSelect={selectEvidence} category={category} query={query} focusRequest={focusRequest} />
     <header className="case-header" aria-label="SparshSunilNaik engineering portfolio"><BrandLogo className="site-logo"/><div className="brand-copy"><h1>SparshSunilNaik</h1><p>CASE 000 / ENGINEERING INVESTIGATION</p><small>{counts.currentExperience} CURRENT ROLE · {counts.projects} PROJECT FILES · {counts.technologies} TECHNOLOGIES</small></div></header>

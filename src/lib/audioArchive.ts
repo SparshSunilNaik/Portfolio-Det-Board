@@ -21,10 +21,10 @@ export class AudioArchiveController {
     this.handlers={
       loadstart:()=>this.update({status:'loading',error:null}),
       loadedmetadata:()=>this.syncDuration(),durationchange:()=>this.syncDuration(),
-      canplay:()=>{if(this.media.paused)this.update({status:'paused'})},
+      canplay:()=>{if(this.media.paused&&!this.state.error)this.update({status:'paused'})},
       playing:()=>this.update({status:'playing',error:null}),
       waiting:()=>{if(!this.media.paused)this.update({status:'loading'})},
-      pause:()=>{if(!this.media.ended)this.update({status:'paused'})},
+      pause:()=>{if(!this.media.ended&&!this.state.error)this.update({status:'paused'})},
       timeupdate:()=>this.update({currentTime:this.safeTime(this.media.currentTime)}),
       ended:()=>this.update({status:'ended',currentTime:this.safeDuration()}),
       error:()=>this.update({status:'error',error:errorMessages[this.media.error?.code??0]??'The soundtrack is unavailable.'}),

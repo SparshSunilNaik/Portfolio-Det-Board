@@ -41,7 +41,7 @@ export function App() {
     <InvestigationBoard camera={camera} setCamera={setCamera} selectedId={selectedId} onSelect={selectEvidence} category={category} query={query} focusRequest={focusRequest} />
     <header className="case-header" aria-label="SparshSunilNaik engineering portfolio"><BrandLogo className="site-logo"/><div className="brand-copy"><h1>SparshSunilNaik</h1><p>CASE 000 / ENGINEERING INVESTIGATION</p><small>{counts.currentExperience} CURRENT ROLE · {counts.projects} PROJECT FILES · {counts.technologies} TECHNOLOGIES</small></div></header>
     <div className="investigation-signal" aria-hidden="true"><span>ACTIVE INVESTIGATION</span><i/><b>VERIFIED EVIDENCE</b></div>
-    <Navigator query={query} setQuery={setQuery} category={category} setCategory={setCategory} onFocus={focus} onOverview={()=>setOverview(true)} camera={camera} setCamera={setCamera} />
+    <Navigator query={query} setQuery={setQuery} category={category} setCategory={setCategory} selectedId={selectedId} onFocus={focus} onOverview={()=>setOverview(true)} camera={camera} setCamera={setCamera} />
     <FindingsLedger project={selected} onClose={()=>selectEvidence(null)} onOpenDossier={openDossier} onFocus={focus}/>
     <Dossier project={dossier} onClose={closeDossier} onFocus={focusDossier} />
     {overview&&<GuidedOverview onClose={()=>setOverview(false)} onFocus={(id)=>{setOverview(false);focusDossier(id)}} />}

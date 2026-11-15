@@ -5,14 +5,16 @@ import { filterProjects } from '../../lib/search'
 import type { Camera, Category } from '../../types'
 import { publicLinks } from '../../data/links'
 import { LinkedInIcon } from '../ui/SocialIcon'
+import { MobileEvidenceReel } from './MobileEvidenceReel'
 
-interface Props {query:string;setQuery:(value:string)=>void;category:Category|'all';setCategory:(value:Category|'all')=>void;onFocus:(id:string)=>void;onOverview:()=>void;camera:Camera;setCamera:Dispatch<SetStateAction<Camera>>}
-export function Navigator({query,setQuery,category,setCategory,onFocus,onOverview,camera,setCamera}:Props){
+interface Props {query:string;setQuery:(value:string)=>void;category:Category|'all';setCategory:(value:Category|'all')=>void;selectedId:string|null;onFocus:(id:string)=>void;onOverview:()=>void;camera:Camera;setCamera:Dispatch<SetStateAction<Camera>>}
+export function Navigator({query,setQuery,category,setCategory,selectedId,onFocus,onOverview,camera,setCamera}:Props){
   const [open,setOpen]=useState(false);const results=useMemo(()=>filterProjects(projects,query,category),[query,category])
   const zoom=(factor:number)=>setCamera(c=>({...c,scale:clampScale(c.scale*factor)}))
   return <>
     <nav className={`navigator ${open?'is-open':''}`} aria-label="Investigation controls">
       <button className="nav-toggle" onClick={()=>setOpen(!open)} aria-expanded={open}>INDEX <span>{results.length}</span></button>
+      <MobileEvidenceReel items={results} selectedId={selectedId} onSelect={onFocus}/>
       <div className="nav-body">
         <label className="search-label" htmlFor="evidence-search"><span>SEARCH EVIDENCE</span><input id="evidence-search" type="search" placeholder="project, technology, domain…" value={query} onChange={e=>setQuery(e.target.value)}/><kbd>/</kbd></label>
         <div className="filters" aria-label="Evidence categories">{categories.map(c=><button key={c.id} className={category===c.id?'active':''} onClick={()=>setCategory(c.id)}>{c.label}</button>)}</div>

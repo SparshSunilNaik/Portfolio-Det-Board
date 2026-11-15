@@ -1,9 +1,9 @@
 export const audioArchiveTrack = {
   title: 'Investigation Theme',
-  artist: 'CASE 000',
-  status: 'Demo Soundtrack',
-  source: `${import.meta.env.BASE_URL}audio/case-000-demo.mp3`,
-  duration: 48,
+  artist: 'Sparsh Sunil Naik',
+  status: 'Original Piano Performance',
+  description: 'A personal piano recording by Sparsh Sunil Naik.',
+  source: `${import.meta.env.BASE_URL}audio/investigation-theme.mp3`,
 } as const
 
 export const AUDIO_PREFERENCE_KEY = 'case-000:audio-preferences'

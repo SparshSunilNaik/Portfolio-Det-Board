@@ -12,6 +12,13 @@ import { EvidenceCard } from '../components/board/EvidenceCard'
 import { ProfilePortrait } from '../components/ui/ProfilePortrait'
 import { IdentityDossier } from '../components/board/IdentityDossier'
 import { INITIAL_CAMERA } from '../App'
+import { CaseIntake } from '../components/intake/CaseIntake'
+import { FindingsLedger } from '../components/findings/FindingsLedger'
+import { MobileEvidenceReel } from '../components/navigation/MobileEvidenceReel'
+import { ProjectDiagram } from '../components/dossiers/ProjectDiagram'
+import { ThreadLayer } from '../components/board/ThreadLayer'
+import { CASE_INTAKE_SESSION_KEY, REDUCED_MOTION_QUERY, reducedMotionPreferred, resolveCaseIntake, shouldShowCaseIntake, type SessionStore } from './caseIntake'
+import { createProjectFinding } from './findings'
 import indexHtml from '../../index.html?raw'
 import spiderLogo from '../../public/brand/case-spider.svg?raw'
 
@@ -66,6 +73,30 @@ describe('Phase 5 portrait and orientation',()=>{
   it('retains the exact approved desktop camera configuration',()=>{expect(INITIAL_CAMERA).toEqual({x:-690,y:-395,scale:.72})})
   it('adds a subtle start marker and explicit evidence-card instruction',()=>{const html=renderToStaticMarkup(createElement(IdentityDossier,{onOverview:()=>undefined,onProject:()=>undefined}));expect(html).toContain('START HERE / CASE 000');expect(html).toContain('CLICK ANY EVIDENCE CARD TO INSPECT')})
   it('briefs recruiters across Cobot, autonomy, infrastructure, AI, and research',()=>{const html=renderToStaticMarkup(createElement(GuidedOverview,{onClose:()=>undefined,onFocus:()=>undefined}));for(const title of ['COBOT','EgoNav VLA','Polaris','5G Edge Orchestrator','Sentinel','RL Dynamic Pricing'])expect(html).toContain(title);expect(html).toContain('BEST PAPER');expect(html).toContain('VIEW RESUME');expect(html).toContain('LINKEDIN');expect(html).toContain('GITHUB')})
+})
+
+describe('Stage B case intake',()=>{
+  class MemoryStore implements SessionStore { value:string|null=null;getItem(){return this.value}setItem(_key:string,value:string){this.value=value} }
+  it('shows once per tab session and skips direct dossier links',()=>{const store=new MemoryStore();expect(shouldShowCaseIntake(store)).toBe(true);expect(resolveCaseIntake('enter',store)).toEqual({open:false,action:'enter'});expect(store.value).toBe('1');expect(shouldShowCaseIntake(store)).toBe(false);expect(shouldShowCaseIntake(new MemoryStore(),true)).toBe(false)})
+  it('supports both skip and enter when session storage is unavailable',()=>{const unavailable:SessionStore={getItem(){throw new Error('blocked')},setItem(){throw new Error('blocked')}};expect(shouldShowCaseIntake(unavailable)).toBe(true);expect(resolveCaseIntake('skip',unavailable)).toEqual({open:false,action:'skip'});expect(resolveCaseIntake('enter',unavailable)).toEqual({open:false,action:'enter'});expect(CASE_INTAKE_SESSION_KEY).toBe('case-000:intake-seen')})
+  it('renders an accessible, immediately skippable authored opening',()=>{const html=renderToStaticMarkup(createElement(CaseIntake,{evidenceCount:19,onComplete:()=>undefined,onBriefing:()=>undefined}));expect(html).toContain('role="dialog"');expect(html).toContain('aria-modal="true"');expect(html).toContain('OPEN CASE FILE');expect(html).toContain('SKIP INTRO');expect(html).toContain('RECRUITER BRIEFING');expect(html).toContain('19 PROJECT FILES');expect(html).toContain('Portrait of Sparsh Sunil Naik')})
+  it('detects reduced-motion preference without requiring browser APIs',()=>{expect(REDUCED_MOTION_QUERY).toBe('(prefers-reduced-motion: reduce)');expect(reducedMotionPreferred({matches:true})).toBe(true);expect(reducedMotionPreferred({matches:false})).toBe(false);expect(reducedMotionPreferred(null)).toBe(false)})
+})
+
+describe('Stage B findings and relationships',()=>{
+  const cobot=projects.find(project=>project.id==='cobot')!
+  const elma=projects.find(project=>project.id==='elma-labs')!
+  it('maps findings only from validated project metadata',()=>{const finding=createProjectFinding(elma);expect(finding.mission).toBe(elma.problem);expect(finding.implementation).toEqual(elma.engineered.slice(0,3));expect(finding.validation).toEqual(elma.results.slice(0,2));expect(finding.boundary.join(' ')).toMatch(/no physical-board|remain planned/i)})
+  it('renders compact findings with typed related cases and a dossier path',()=>{const html=renderToStaticMarkup(createElement(FindingsLedger,{project:cobot,onClose:()=>undefined,onOpenDossier:()=>undefined,onFocus:()=>undefined}));expect(html).toContain('FINDINGS LEDGER');expect(html).toContain('MISSION');expect(html).toContain('IMPLEMENTATION');expect(html).toContain('EVIDENCE BOUNDARY');expect(html).toContain('SplitBrain-RAG');expect(html).toContain('local inference boundary');expect(html).toContain('OPEN COMPLETE DOSSIER')})
+  it('labels only selected graph relationships',()=>{const focused=renderToStaticMarkup(createElement(ThreadLayer,{selectedId:'cobot'}));const idle=renderToStaticMarkup(createElement(ThreadLayer,{selectedId:null}));expect(focused).toContain('LOCAL INFERENCE BOUNDARY');expect(focused).toContain('is-focused');expect(idle).not.toContain('thread-label')})
+  it('keeps search and category filtering compatible with ledger selection',()=>{const visible=filterProjects(projects,'Ollama','agents');expect(visible.map(project=>project.id)).toEqual(expect.arrayContaining(['cobot','splitbrain']));expect(createProjectFinding(visible[0]).mission.length).toBeGreaterThan(20)})
+})
+
+describe('Stage B responsive storytelling',()=>{
+  it('renders every filtered item in an accessible mobile reel',()=>{const items=filterProjects(projects,'','experience');const html=renderToStaticMarkup(createElement(MobileEvidenceReel,{items,selectedId:'elma-labs',onSelect:()=>undefined}));expect(html).toContain('EVIDENCE REEL');expect(html).toContain('Show findings for Elma Labs');expect(html).toContain('Entropy Systems');expect(html.indexOf('Elma Labs')).toBeLessThan(html.indexOf('Entropy Systems'))})
+  it('renders evidence-backed diagrams for the six approved system stories',()=>{for(const id of ['elma-labs','cobot','egonav','polaris','network-slicing','dynamic-pricing']){const project=projects.find(item=>item.id===id)!;const html=renderToStaticMarkup(createElement(ProjectDiagram,{project}));expect(html).toContain('VERIFIED SYSTEM TRACE');expect(html).toContain(`${project.shortTitle} technical workflow`)}expect(renderToStaticMarkup(createElement(ProjectDiagram,{project:projects.find(item=>item.id==='sentinel')!}))).toBe('')})
+  it('keeps full dossiers accessible and adds diagrams without replacing evidence',()=>{const html=renderToStaticMarkup(createElement(Dossier,{project:projects.find(item=>item.id==='polaris')!,onClose:()=>undefined,onFocus:()=>undefined}));expect(html).toContain('role="dialog"');expect(html).toContain('aria-modal="true"');expect(html).toContain('Close dossier');expect(html).toContain('RGB AUTONOMY &amp; RECOVERY LOOP');expect(html).toContain('Problem investigated')})
+  it('integrates the existing briefing with one clear investigation route',()=>{const html=renderToStaticMarkup(createElement(GuidedOverview,{onClose:()=>undefined,onFocus:()=>undefined}));expect(html).toContain('Briefing route');for(const step of ['IDENTITY','EXPERIENCE','SYSTEMS','RESEARCH','CONTACT'])expect(html).toContain(step)})
 })
 
 describe('board coordinate transforms',()=>{

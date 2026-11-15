@@ -13,7 +13,7 @@ import type { Camera, Category } from './types'
 export const INITIAL_CAMERA: Camera = { x: -690, y: -395, scale: .72 }
 
 export function App() {
-  const directProject=useMemo(()=>new URLSearchParams(location.hash.slice(1)).get('project'),[])
+  const directProject=useMemo(()=>{const id=new URLSearchParams(location.hash.slice(1)).get('project');return projects.some(project=>project.id===id)?id:null},[])
   const [selectedId,setSelectedId]=useState<string|null>(directProject)
   const [dossierId,setDossierId]=useState<string|null>(directProject)
   const [focusRequest,setFocusRequest]=useState<{id:string;nonce:number}|null>(null)
@@ -45,6 +45,6 @@ export function App() {
     <FindingsLedger project={selected} onClose={()=>selectEvidence(null)} onOpenDossier={openDossier} onFocus={focus}/>
     <Dossier project={dossier} onClose={closeDossier} onFocus={focusDossier} />
     {overview&&<GuidedOverview onClose={()=>setOverview(false)} onFocus={(id)=>{setOverview(false);focusDossier(id)}} />}
-    {intakeOpen&&<CaseIntake onComplete={completeIntake} onBriefing={()=>setOverview(true)}/>}
+    {intakeOpen&&<CaseIntake evidenceCount={counts.projects} onComplete={completeIntake} onBriefing={()=>setOverview(true)}/>}
   </main>
 }

@@ -6,6 +6,7 @@ export interface SessionStore {
 }
 
 export type CaseIntakeAction = 'enter' | 'skip'
+export const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 
 export function shouldShowCaseIntake(store: SessionStore | null, directProject = false) {
   if (directProject) return false
@@ -16,3 +17,5 @@ export function resolveCaseIntake(action: CaseIntakeAction, store: SessionStore 
   try { store?.setItem(CASE_INTAKE_SESSION_KEY, '1') } catch { /* Continue without storage. */ }
   return { open: false, action }
 }
+
+export function reducedMotionPreferred(media:{matches:boolean}|null){return Boolean(media?.matches)}

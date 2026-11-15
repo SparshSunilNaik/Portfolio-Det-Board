@@ -6,6 +6,7 @@ import { Navigator } from './components/navigation/Navigator'
 import { BrandLogo } from './components/ui/BrandLogo'
 import { CaseIntake } from './components/intake/CaseIntake'
 import { FindingsLedger } from './components/findings/FindingsLedger'
+import { AudioArchive } from './components/audio/AudioArchive'
 import { projects } from './data/projects'
 import { resolveCaseIntake, shouldShowCaseIntake, type CaseIntakeAction } from './lib/caseIntake'
 import type { Camera, Category } from './types'
@@ -44,6 +45,7 @@ export function App() {
     <div className="investigation-signal" aria-hidden="true"><span>ACTIVE INVESTIGATION</span><i/><b>VERIFIED EVIDENCE</b></div>
     <Navigator query={query} setQuery={setQuery} category={category} setCategory={setCategory} selectedId={selectedId} onFocus={focus} onOverview={()=>setOverview(true)} camera={camera} setCamera={setCamera} />
     <FindingsLedger project={selected} onClose={()=>selectEvidence(null)} onOpenDossier={openDossier} onFocus={focus}/>
+    <AudioArchive obscured={intakeOpen}/>
     <Dossier project={dossier} onClose={closeDossier} onFocus={focusDossier} />
     {overview&&<GuidedOverview onClose={()=>setOverview(false)} onFocus={(id)=>{setOverview(false);focusDossier(id)}} />}
     {intakeOpen&&<CaseIntake evidenceCount={counts.projects} onComplete={completeIntake} onBriefing={()=>setOverview(true)}/>}
